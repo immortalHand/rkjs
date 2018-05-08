@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mapper.StorageMapper">
+
+    <select id="selectCount" resultType="int">
+        select count(*) from storage
+    </select>
+
+    <select id="selectList" resultType="Storage" parameterType="Page">
+        select  * from storage order by warehouseno desc limit #{startindex},#{pageCount}
+    </select>
+
+    <select id="selectid" resultType="int">
+        select max(warehouseno) from storage
+    </select>
+
+    <insert id="insertStorage" parameterType="Storage">
+        INSERT INTO erp_db.storage
+	(
+	commodityname,
+	supplier,
+	specifications,
+	specificationunit,
+	number,
+	unit,
+	price,
+	storagdate,
+	remarks
+	)
+	VALUES
+	(
+	#{commodityname},
+	#{supplier},
+	#{specifications},
+	#{specificationunit},
+	#{number},
+	#{unit},
+	#{price},
+	#{storagdate},
+	#{remarks}
+	);
+    </insert>
+
+    <select id="selectName" parameterType="Storage" resultType="int">
+        select count(*) from storage where commodityname = #{commodityname}
+    </select>
+
+	<select id="selectByName" resultType="Storage" parameterType="Storage">
+		select * from storage where warehouseno = #{warehouseno}
+	</select>
 </mapper>

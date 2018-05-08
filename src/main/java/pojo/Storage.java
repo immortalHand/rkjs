@@ -1,5 +1,7 @@
 package pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Storage {
@@ -101,5 +103,21 @@ public class Storage {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Storage{" +
+                "warehouseno=" + warehouseno +
+                ", commodityname='" + commodityname + '\'' +
+                ", supplier='" + supplier + '\'' +
+                ", specifications='" + specifications + '\'' +
+                ", specificationunit='" + specificationunit + '\'' +
+                ", number=" + number +
+                ", unit='" + unit + '\'' +
+                ", price=" + price +
+                ", storagdate=" + storagdate +
+                ", remarks='" + remarks + '\'' +
+                '}';
     }
 }
