@@ -27,6 +27,12 @@ public class StorageController {
         return "index";
     }
 
+    /**
+     * 分页显示的公共方法
+     * @param pageIndex
+     * @param pageCount
+     * @return
+     */
     public Page getPage(Integer pageIndex,Integer pageCount){
         int total = storageService.selectCount(); //信息总数
         int pageTotal = total%pageCount==0?total/pageCount:total/pageCount+1;  //可分总页数
@@ -49,6 +55,13 @@ public class StorageController {
         binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat,true));
     }
 
+    /**
+     * 添加信息放发
+     * @param storage
+     * @param request
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "add")
     @ResponseBody
     public ModelAndView addStorage(Storage storage, HttpServletRequest request, ModelAndView mv){
@@ -59,12 +72,24 @@ public class StorageController {
         return mv;
     }
 
+    /**
+     * 查询名字是否重复
+     * @param storage
+     * @return
+     */
     @RequestMapping(value = "name")
     @ResponseBody
     public Integer name(Storage storage){
         return storageService.selectName(storage);
     }
 
+    /**
+     * 分页显示
+     * @param pageIndex
+     * @param request
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "show")
     @ResponseBody
     public ModelAndView show(Integer pageIndex, HttpServletRequest request, ModelAndView mv){
@@ -74,6 +99,10 @@ public class StorageController {
         return mv;
     }
 
+    /**
+     * 查询即将插入的下一个id
+     * @return
+     */
     @RequestMapping("showid")
     @ResponseBody
     public Object showid(){
@@ -81,6 +110,11 @@ public class StorageController {
         return id+1;
     }
 
+    /**
+     * 通过id查找这个商品的信息
+     * @param storage
+     * @return
+     */
     @RequestMapping("id")
     @ResponseBody
     public Object id(Storage storage){

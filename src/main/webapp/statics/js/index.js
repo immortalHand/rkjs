@@ -1,4 +1,7 @@
+//页面打开加载的方法
 $(function () {
+
+    //ajax分页显示数据
     $.ajax({
         type : 'post',
         url: 'show',
@@ -9,6 +12,8 @@ $(function () {
             $("#show").append(data);
         }
     });
+
+    //查询即将插入的下个id
     $.ajax({
         type : 'post',
         url: 'showid',
@@ -17,10 +22,12 @@ $(function () {
         }
     });
 
+    //绑定鼠标移出边框颜色恢复
     $("input").on('blur',function(){
         $(this).css("border","1px solid black");
     })
 
+    //绑定鼠标点击左边显示信息
     $("#show").on("click",".ss",function(e){
         $(e.target).parent().siblings().css("background","white");
         $(e.target).parent().css("background","red");
@@ -56,6 +63,7 @@ $(function () {
 
 })
 
+//ajax时间格式转换
 function fmtDate(inputTime) {
     var date = new Date(inputTime);
     var y = date.getFullYear();
@@ -72,6 +80,7 @@ function fmtDate(inputTime) {
     return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 }
 
+//上下页点击分页显示
 function page(id) {
     $.ajax({
         type : 'post',
@@ -85,6 +94,7 @@ function page(id) {
     });
 }
 
+//添加的ajax
 function add() {
     var flag = true;
     var put = document.getElementsByTagName("input");
@@ -137,18 +147,6 @@ function add() {
 
 }
 
-function show(pageIndex) {
-    $.ajax({
-        type : 'post',
-        url: 'show',
-        data: 'pageIndex = '+pageIndex,
-        dataType:"html",
-        success:function(data){
-            $("#show").append(data);
-        }
-
-    });
-}
 
 
 
